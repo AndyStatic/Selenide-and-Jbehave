@@ -1,26 +1,27 @@
 package pages;
 
+import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class SignInPage {
 
-    private WebDriver driver;
-
-    public SignInPage(WebDriver driver){
-        this.driver = driver;
+    public SignInPage openSignInPage(){
+        Selenide.open("/index.php?controller=authentication&back=my-account");
+        return this;
     }
 
     private By emailCreateInput = By.id("email_create");
     private By submitCreateButton = By.id("SubmitCreate");
 
     public SignInPage iEnterEmailForCreateAnAccount(String email){
-        driver.findElement(emailCreateInput).sendKeys(email);
+        $(emailCreateInput).sendKeys(email);
         return this;
     }
 
     public SignInPage iPressSubmitCreateButton(){
-        driver.findElement(submitCreateButton).click();
+        $(submitCreateButton).click();
         return this;
     }
 }

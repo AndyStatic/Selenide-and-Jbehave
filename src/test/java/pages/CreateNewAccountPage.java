@@ -1,19 +1,16 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class CreateNewAccountPage {
 
-    private WebDriver driver;
-
-    public CreateNewAccountPage(WebDriver driver){
-        this.driver = driver;
+    public CreateNewAccountPage openCreateNewAccountPage(){
+        Selenide.open("/index.php?controller=authentication&back=my-account#account-creation");
+        return this;
     }
 
     private By firstNameInput = By.id("customer_firstname");
@@ -30,53 +27,52 @@ public class CreateNewAccountPage {
     private String errorAlertBoxErrorByTxt = "//*[@id='center_column']/div/ol/li[text()='%s']";
 
     public CreateNewAccountPage iEnterFirstNameForCreateAnAccount(String firstName){
-        driver.findElement(firstNameInput).sendKeys(firstName);
+        $(firstNameInput).sendKeys(firstName);
         return this;
     }
 
     public CreateNewAccountPage iEnterLastNameForCreateAnAccount(String lastName){
-        driver.findElement(lastNameInput).sendKeys(lastName);
+        $(lastNameInput).sendKeys(lastName);
         return this;
     }
 
     public CreateNewAccountPage iEnterPasswordForCreateAnAccount(String password){
-        driver.findElement(passwordInput).sendKeys(password);
+        $(passwordInput).sendKeys(password);
         return this;
     }
 
     public CreateNewAccountPage iEnterAddress1ForCreateAnAccount(String address1){
-        driver.findElement(addressInput).sendKeys(address1);
+        $(addressInput).sendKeys(address1);
         return this;
     }
 
     public CreateNewAccountPage iEnterCityForCreateAnAccount(String city){
-        driver.findElement(cityInput).sendKeys(city);
+        $(cityInput).sendKeys(city);
         return this;
     }
 
     public CreateNewAccountPage iSelectState(String state){
-        driver.findElement(stateSelector).click();
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(stateOption,state)))).click();
+        $(stateSelector).selectOption(state);
         return this;
     }
 
     public CreateNewAccountPage iEnterPostCodeForCreateAnAccount(String postCode){
-        driver.findElement(postCodeInput).sendKeys(postCode);
+        $(postCodeInput).sendKeys(postCode);
         return this;
     }
 
     public CreateNewAccountPage iEnterMobilePhoneForCreateAnAccount(String mobilePhone){
-        driver.findElement(mobilePhoneInput).sendKeys(mobilePhone);
+        $(mobilePhoneInput).sendKeys(mobilePhone);
         return this;
     }
 
     public CreateNewAccountPage iPressSubmitAccountButton(){
-        driver.findElement(submitAccountButton).click();
+        $(submitAccountButton).click();
         return this;
     }
 
-    public List<WebElement> getErrors(){
-        return driver.findElements(errorAlertBoxErrors);
+    public ElementsCollection getErrors(){
+        return $$(errorAlertBoxErrors);
     }
 
     public String getErrorByNumber(int number){
@@ -84,7 +80,7 @@ public class CreateNewAccountPage {
     }
 
     public boolean isErrorVisible(String errorTxt){
-        return driver.findElements(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).size() > 0 &&
-                driver.findElements(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).get(0).isDisplayed();
+        return $$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).size() > 0 &&
+                $$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).get(0).isDisplayed();
     }
 }
