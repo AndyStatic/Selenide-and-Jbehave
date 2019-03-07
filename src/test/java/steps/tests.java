@@ -31,7 +31,7 @@ public class tests {
     public void coverageTest(){
         signInPage = new SignInPage();
         signInPage.openSignInPage()
-            .iEnterEmailForCreateAnAccount("hmrc44@test.com")
+            .iEnterEmailForCreateAnAccount("hmrc48@test.com")
             .iPressSubmitCreateButton();
 
         createNewAccountPage = new CreateNewAccountPage();
@@ -44,8 +44,9 @@ public class tests {
             .iSelectState("Alaska")
             .iEnterPostCodeForCreateAnAccount("00000")
             .iEnterMobilePhoneForCreateAnAccount("123456789")
-            .iPressSubmitAccountButton();
-        Assert.assertEquals(0, createNewAccountPage.getErrors().size());
+            .iPressSubmitAccountButton()
+            .getErrorByTextIsNotVisible("Hello World");
+        //Assert.assertEquals(0, createNewAccountPage.getErrors().size());
     }
 
 }

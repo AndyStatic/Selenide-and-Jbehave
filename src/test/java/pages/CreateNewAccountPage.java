@@ -3,6 +3,8 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -82,5 +84,10 @@ public class CreateNewAccountPage {
     public boolean isErrorVisible(String errorTxt){
         return $$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).size() > 0 &&
                 $$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).get(0).isDisplayed();
+    }
+
+    public CreateNewAccountPage getErrorByTextIsNotVisible(String errorTxt){
+        $(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).shouldNotBe(visible);
+        return this;
     }
 }

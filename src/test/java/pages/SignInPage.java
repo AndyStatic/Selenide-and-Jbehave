@@ -3,6 +3,8 @@ package pages;
 import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Selenide.$;
 
 public class SignInPage {
@@ -21,6 +23,7 @@ public class SignInPage {
     }
 
     public SignInPage iPressSubmitCreateButton(){
+        $(submitCreateButton).waitUntil(enabled,5000); //5 sec
         $(submitCreateButton).click();
         return this;
     }
