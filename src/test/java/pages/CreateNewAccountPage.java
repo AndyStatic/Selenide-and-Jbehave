@@ -1,19 +1,17 @@
 package pages;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
+import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import java.util.List;
 
-public class CreateNewAccountPage {
+import static java.lang.String.format;
+import static org.openqa.selenium.By.xpath;
 
-    public CreateNewAccountPage openCreateNewAccountPage(){
-        Selenide.open("/index.php?controller=authentication&back=my-account#account-creation");
-        return this;
-    }
+@DefaultUrl("http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation")
+public class CreateNewAccountPage extends PageObject {
 
     private By firstNameInput = By.id("customer_firstname");
     private By lastNameInput = By.id("customer_lastname");
@@ -25,56 +23,57 @@ public class CreateNewAccountPage {
     private By postCodeInput = By.id("postcode");
     private By mobilePhoneInput = By.id("phone_mobile");
     private By submitAccountButton = By.id("submitAccount");
-    private By errorAlertBoxErrors = By.xpath("//*[@id='center_column']/div/ol/li");
+    private By errorAlertBoxErrors = xpath("//*[@id='center_column']/div/ol/li");
     private String errorAlertBoxErrorByTxt = "//*[@id='center_column']/div/ol/li[text()='%s']";
 
     public CreateNewAccountPage iEnterFirstNameForCreateAnAccount(String firstName){
-        $(firstNameInput).sendKeys(firstName);
+        find(firstNameInput).sendKeys(firstName);
         return this;
     }
 
     public CreateNewAccountPage iEnterLastNameForCreateAnAccount(String lastName){
-        $(lastNameInput).sendKeys(lastName);
+        find(lastNameInput).sendKeys(lastName);
         return this;
     }
 
     public CreateNewAccountPage iEnterPasswordForCreateAnAccount(String password){
-        $(passwordInput).sendKeys(password);
+        find(passwordInput).sendKeys(password);
         return this;
     }
 
     public CreateNewAccountPage iEnterAddress1ForCreateAnAccount(String address1){
-        $(addressInput).sendKeys(address1);
+        find(addressInput).sendKeys(address1);
         return this;
     }
 
     public CreateNewAccountPage iEnterCityForCreateAnAccount(String city){
-        $(cityInput).sendKeys(city);
+        find(cityInput).sendKeys(city);
         return this;
     }
 
     public CreateNewAccountPage iSelectState(String state){
-        $(stateSelector).selectOption(state);
+        find(stateSelector).click();
+        find(xpath(format(stateOption,state))).waitUntilVisible().click();
         return this;
     }
 
     public CreateNewAccountPage iEnterPostCodeForCreateAnAccount(String postCode){
-        $(postCodeInput).sendKeys(postCode);
+        find(postCodeInput).sendKeys(postCode);
         return this;
     }
 
     public CreateNewAccountPage iEnterMobilePhoneForCreateAnAccount(String mobilePhone){
-        $(mobilePhoneInput).sendKeys(mobilePhone);
+        find(mobilePhoneInput).sendKeys(mobilePhone);
         return this;
     }
 
     public CreateNewAccountPage iPressSubmitAccountButton(){
-        $(submitAccountButton).click();
+        find(submitAccountButton).click();
         return this;
     }
 
-    public ElementsCollection getErrors(){
-        return $$(errorAlertBoxErrors);
+    public List<WebElementFacade> getErrors(){
+        return findAll(errorAlertBoxErrors);
     }
 
     public String getErrorByNumber(int number){
@@ -82,12 +81,13 @@ public class CreateNewAccountPage {
     }
 
     public boolean isErrorVisible(String errorTxt){
-        return $$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).size() > 0 &&
-                $$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).get(0).isDisplayed();
+        return findAll(xpath(format(errorAlertBoxErrorByTxt,errorTxt))).size() > 0 &&
+                findAll(xpath(format(errorAlertBoxErrorByTxt,errorTxt))).get(0).isDisplayed();
     }
 
     public CreateNewAccountPage getErrorByTextIsNotVisible(String errorTxt){
-        $(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).shouldNotBe(visible);
+        //$(By.xpath(String.format(errorAlertBoxErrorByTxt,errorTxt))).shouldNotBe(visible);
+        find(xpath(format(errorAlertBoxErrorByTxt,errorTxt))).shouldNotBeVisible();
         return this;
     }
 }
