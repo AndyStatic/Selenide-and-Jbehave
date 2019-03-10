@@ -1,20 +1,6 @@
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Steps;
-import org.assertj.core.api.Assertions;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-import pages.CreateNewAccountPage;
-import pages.SignInPage;
-import steps.CreateNewAccountSteps;
-import steps.SignInSteps;
-
-@RunWith(SerenityRunner.class)
+//@RunWith(SerenityRunner.class)
 public class tests {
-
+/*
     @Steps
     SignInSteps signInSteps;
     @Steps
@@ -24,9 +10,10 @@ public class tests {
     WebDriver driver;
 
     @Test
+    @Title("Initial coverage test")
     public void coverageTest() {
         signInSteps.openSignInPage();
-        signInSteps.iEnterEmailForCreateAnAccount("hmrc51@test.com");
+        signInSteps.iEnterEmailForCreateAnAccount("hmrc52@test.com");
         signInSteps.iPressSubmitCreateButton();
 
         createNewAccountSteps.openCreateNewAccountPage();
@@ -41,5 +28,5 @@ public class tests {
         createNewAccountSteps.iPressSubmitAccountButton();
         Assert.assertEquals(0, createNewAccountSteps.getErrors().size());
     }
-
+*/
 }

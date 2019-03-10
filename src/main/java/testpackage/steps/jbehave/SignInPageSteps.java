@@ -1,24 +1,27 @@
-package steps;
+package testpackage.steps.jbehave;
 
-import net.thucydides.core.annotations.Step;
-import pages.SignInPage;
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.When;
+import testpackage.pages.SignInPage;
 
-public class SignInSteps {
+
+public class SignInPageSteps {
 
     private SignInPage signInPage;
 
-    @Step("User opens Sing In page")
+    @Given("I open Sign In page")
     public void openSignInPage(){
         signInPage.open();
     }
 
-    @Step("User types email [0] for new account")
+    @When("I enter email for create an account \"$email\"")
     public void iEnterEmailForCreateAnAccount(String email){
         signInPage.iEnterEmailForCreateAnAccount(email);
     }
 
-    @Step("User press Submit button for register new account")
+    @When("I press Submit Create button")
     public void iPressSubmitCreateButton(){
         signInPage.iPressSubmitCreateButton();
     }
+
 }
