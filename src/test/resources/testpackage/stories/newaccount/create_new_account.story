@@ -1,4 +1,7 @@
+Searching by keyword
+
 Meta:
+@tag product:search
 
 Narrative:
 As a user
@@ -7,7 +10,7 @@ So that I can continue using website's functionality as registered user
 
 Scenario: create new account
 Given I open Sign In page
-When I enter email for create an account "hmrc52@test.com"
+When I enter email for create an account "hmrc53@test.com"
 And I press Submit Create button
 And Create New Account page is opened
 And I enter firstname for create an account "Hello"
