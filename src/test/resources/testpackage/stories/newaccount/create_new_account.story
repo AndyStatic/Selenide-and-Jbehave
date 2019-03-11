@@ -3,6 +3,11 @@ As a user
 I want to create new account
 So that I can continue using website's functionality as registered user
 
+Narrative: Lifecycle:
+Narrative: Before:
+Narrative: Given I open Sign In page
+Narrative: This will be executed before each scenario
+
 Scenario: create new account
 Meta: @skip
 Given I open Sign In page
@@ -43,7 +48,7 @@ Then there is no error message displayed
 
 Scenario: create new account 3
 Given I open Sign In page
-When I enter email for create an account "hmrc59@test.com"
+When I enter email for create an account "hmrc60@test.com"
 And I press Submit Create button
 And Create New Account page is opened
 And I enter fullname

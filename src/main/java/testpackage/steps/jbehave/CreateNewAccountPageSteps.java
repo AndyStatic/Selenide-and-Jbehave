@@ -3,8 +3,11 @@ package testpackage.steps.jbehave;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.jbehave.core.model.ExamplesTable;
 import org.junit.Assert;
 import testpackage.pages.CreateNewAccountPage;
+
+import java.util.Map;
 
 public class CreateNewAccountPageSteps {
 
@@ -14,6 +17,13 @@ public class CreateNewAccountPageSteps {
     @When("Create New Account page is opened")
     public void openCreateNewAccountPage(){
         createNewAccountPage.open();
+    }
+
+    @When("I enter fullname $table")
+    public void iEnterFullNameForCreateAnAccount(ExamplesTable fullName){
+        Map<String, String> fullNameMap = fullName.getRow(0);
+        createNewAccountPage.iEnterFirstNameForCreateAnAccount(fullNameMap.get("firstname"));
+        createNewAccountPage.iEnterLastNameForCreateAnAccount(fullNameMap.get("lastname"));
     }
 
     @When("I enter firstname for create an account \"$firstName\"")
